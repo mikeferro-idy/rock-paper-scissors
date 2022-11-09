@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        function num_to_rps (num){
+            if (num === 0) return 'rock';
+            if (num === 1) return 'paper';
+            if (num === 2) return 'scissor';
+        }
+        function getComputerChoice () {
+            let randNum = Math.floor(Math.random() * 3);
+            return num_to_rps(randNum);
+        }
+        function getPlayerChoice () {
+            let playerSelection = prompt("Rock, Paper, Scissors?").toLowerCase();
+            return playerSelection;
+        }
+
+        function round (playerSelection, computerSelection){
+            if (playerSelection === computerSelection) return 'tie';
+            if (playerSelection === 'rock' && computerSelection === 'paper') return 'lose';
+            if (playerSelection === 'paper' && computerSelection === 'scissor') return 'lose';
+            if (playerSelection === 'scissor' && computerSelection === 'rock') return 'lose';
+            return 'win';
+        }
+        function game () {
+            let player_score = 0;
+            let computer_score = 0;
+            let output = '';
+            for(let i = 0 ; i < 5; i++){
+                let player = getPlayerChoice();
+                let comp = getComputerChoice();
+                let result = round(player,comp);
+                if (result === 'tie'){
+                    output = "TIE";
+                }
+                else if (result === 'lose'){
+                    output = `you LOSE! ${comp} beats ${player}!`
+                    computer_score++;
+                }
+                else{
+                    output = `you WIN! ${player} beats ${comp}!`
+                    player_score++;
+                }
+                console.log(output);
+                console.log(`score YOU: ${player_score} COMP: ${computer_score}`);
+            }
+        }
+        game();
+    </script>
+</body>
+</html>
