@@ -1,0 +1,47 @@
+* {
+    /* box-sizing: border-box; */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background-color: #283618;
+    font-family:  Arial, Helvetica, sans-serif;
+
+}
+
+h1 {
+    text-align: center;
+    color: #fefae0;
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: lowercase;
+    margin-bottom:  32px;
+}
+
+.container{
+    display: flex;
+    justify-content: space-evenly;
+    color: #fefae0;
+    border-style: solid;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 16px;
+    border-style: solid;
+}
+
+button {
+    font-size: 32px;
+    padding: 8px;
+    background-color: #dda15e;
+    border-radius: 8px;
+}
+
+.score-board {
+    border-style: solid;
+}

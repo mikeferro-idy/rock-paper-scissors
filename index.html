@@ -4,9 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Rock Paper Scissor</title>
 </head>
 <body>
+    <h1>Rock, Paper, Scissor</h1>
+    <div class="container">
+        <div class="buttons">
+            <button class="rock">Rock</button>
+            <button class="paper">Paper</button>
+            <button class="scissor">Scissor</button>            
+        </div>
+        <div class="score-board">
+            Click ANY Any Button to Start!
+        </div>
+    </div>
+    
+
+
     <script>
         function num_to_rps (num){
             if (num === 0) return 'rock';
@@ -17,42 +32,68 @@
             let randNum = Math.floor(Math.random() * 3);
             return num_to_rps(randNum);
         }
-        function getPlayerChoice () {
-            let playerSelection = prompt("Rock, Paper, Scissors?").toLowerCase();
-            return playerSelection;
-        }
-
-        function round (playerSelection, computerSelection){
-            if (playerSelection === computerSelection) return 'tie';
-            if (playerSelection === 'rock' && computerSelection === 'paper') return 'lose';
-            if (playerSelection === 'paper' && computerSelection === 'scissor') return 'lose';
-            if (playerSelection === 'scissor' && computerSelection === 'rock') return 'lose';
-            return 'win';
-        }
-        function game () {
+ 
+        function playRound (playerSelection) {
             let player_score = 0;
             let computer_score = 0;
             let output = '';
-            for(let i = 0 ; i < 5; i++){
-                let player = getPlayerChoice();
-                let comp = getComputerChoice();
-                let result = round(player,comp);
-                if (result === 'tie'){
+                let computerSelection = getComputerChoice();
+
+                if (playerSelection === computerSelection){
                     output = "TIE";
                 }
-                else if (result === 'lose'){
-                    output = `you LOSE! ${comp} beats ${player}!`
+                else if ((playerSelection === 'paper' && computerSelection === 'scissor') || 
+                           (playerSelection === 'scissor' && computerSelection === 'rock') ||
+                            (playerSelection === 'rock' && computerSelection == 'paper')
+                            ){
+                    output = `you LOSE! ${computerSelection} beats ${playerSelection}!`
                     computer_score++;
                 }
                 else{
-                    output = `you WIN! ${player} beats ${comp}!`
+                    output = `you WIN! ${playerSelection} beats ${computerSelection}!`
                     player_score++;
                 }
-                console.log(output);
-                console.log(`score YOU: ${player_score} COMP: ${computer_score}`);
-            }
+                console.log(`${output} score YOU: ${player_score} COMP: ${computer_score}`);
+                return `${output} score YOU: ${player_score} COMP: ${computer_score}`;
         }
-        game();
+
+        function getPlayerChoice () {
+            let buttons = document.querySelector(".buttons")
+            const scoreBoard = document.querySelector(".score-board");
+            
+            const content = document.createElement('div')
+            content.classList.add('content');
+
+            buttons.addEventListener('click',function(e) {
+                let playerSelection = e.target.className;
+                content.textContent = playRound(playerSelection), {once:true};;
+                scoreBoard.appendChild(content);
+            }, );
+        }
+        getPlayerChoice();
+        
+
+
+
+   //     game();
+        // let button = document.querySelectorAll("button");
+        // console.log();
+        // button.forEach(function(btn) {
+        //     btn.addEventListener("click", () => {
+        //         console.log(`${btn.className} clicked`);
+        //     });
+            
+       // })
+       
+      // let message = document.querySelector(".message");
+
+       //const content = document.createElement('div');
+       //content.classList.add('content');
+
+       
+      // message.appendChild(content);
+       
+
     </script>
 </body>
 </html>
